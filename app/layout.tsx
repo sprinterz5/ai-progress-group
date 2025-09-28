@@ -2,12 +2,15 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
+
+import { LanguageProvider } from "@/components/language-provider"
+import { translations } from "@/lib/translations"
+
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Startum Kids — твой старт в будущее с ИИ",
-  description:
-    "Современная мини-школа для детей 8+ лет. Развиваем креативность и цифровые навыки через практику с искусственным интеллектом.",
+  title: translations.ru.metadata.title,
+  description: translations.ru.metadata.description,
   generator: "v0.app",
 }
 
@@ -19,8 +22,10 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className="font-sans antialiased">
-        <Suspense fallback={null}>{children}</Suspense>
-        <Analytics />
+        <LanguageProvider>
+          <Suspense fallback={null}>{children}</Suspense>
+          <Analytics />
+        </LanguageProvider>
       </body>
     </html>
   )

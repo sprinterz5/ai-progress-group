@@ -1,30 +1,12 @@
+"use client"
+
 import { Card } from "@/components/ui/card"
 import { Star, Quote } from "lucide-react"
 
+import { useTranslations } from "@/components/language-provider"
+
 export function TestimonialsSection() {
-  const testimonials = [
-    {
-      name: "Анна Петрова",
-      role: "Мама Максима, 10 лет",
-      content:
-        "Максим в восторге от занятий! Теперь он создает своих персонажей и даже помогает мне с презентациями для работы. Спасибо Startum Kids за такой современный подход к обучению.",
-      rating: 5,
-    },
-    {
-      name: "Дмитрий Козлов",
-      role: "Папа Софии, 12 лет",
-      content:
-        "София всегда была творческой, но здесь она научилась воплощать свои идеи с помощью ИИ. Теперь она мечтает стать дизайнером и уже создает потрясающие проекты.",
-      rating: 5,
-    },
-    {
-      name: "Елена Смирнова",
-      role: "Мама Артема, 9 лет",
-      content:
-        "Артем стал более уверенным в себе и начал интересоваться технологиями. Преподаватели умеют найти подход к каждому ребенку. Очень рекомендую!",
-      rating: 5,
-    },
-  ]
+  const t = useTranslations()
 
   return (
     <section className="py-20 bg-muted/30">
@@ -32,16 +14,14 @@ export function TestimonialsSection() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6 text-balance">
-              Что говорят <span className="text-primary">родители</span>
+              {t.testimonials.heading} <span className="text-primary">{t.testimonials.highlight}</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-balance">
-              Отзывы семей, которые уже оценили качество нашего обучения
-            </p>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto text-balance">{t.testimonials.description}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg transition-shadow relative">
+            {t.testimonials.entries.map((testimonial) => (
+              <Card key={testimonial.name} className="p-6 hover:shadow-lg transition-shadow relative">
                 <Quote className="w-8 h-8 text-primary/20 absolute top-4 right-4" />
 
                 <div className="flex items-center gap-1 mb-4">

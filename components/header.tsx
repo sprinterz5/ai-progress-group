@@ -4,8 +4,12 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
+import { LanguageSwitcher } from "@/components/language-switcher"
+import { useTranslations } from "@/components/language-provider"
+
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const t = useTranslations()
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
@@ -14,30 +18,30 @@ export function Header() {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-lg">SK</span>
+              <span className="text-white font-bold text-lg">{t.header.brandInitials}</span>
             </div>
-            <span className="text-xl font-bold text-foreground">Startum Kids</span>
+            <span className="text-xl font-bold text-foreground">{t.header.brandName}</span>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors">
-              О школе
+              {t.header.nav.about}
             </a>
             <a href="#programs" className="text-muted-foreground hover:text-foreground transition-colors">
-              Программы
+              {t.header.nav.programs}
             </a>
             <a href="#advantages" className="text-muted-foreground hover:text-foreground transition-colors">
-              Преимущества
+              {t.header.nav.advantages}
             </a>
             <a href="#contacts" className="text-muted-foreground hover:text-foreground transition-colors">
-              Контакты
+              {t.header.nav.contacts}
             </a>
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button className="bg-primary hover:bg-primary/90 text-white font-medium">Записаться</Button>
+          <div className="hidden md:flex items-center gap-3">
+            <LanguageSwitcher />
+            <Button className="bg-primary hover:bg-primary/90 text-white font-medium">{t.header.cta}</Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -50,19 +54,22 @@ export function Header() {
         {isMenuOpen && (
           <nav className="md:hidden mt-4 pb-4 border-t border-border pt-4">
             <div className="flex flex-col gap-4">
+              <LanguageSwitcher />
               <a href="#about" className="text-muted-foreground hover:text-foreground transition-colors">
-                О школе
+                {t.header.nav.about}
               </a>
               <a href="#programs" className="text-muted-foreground hover:text-foreground transition-colors">
-                Программы
+                {t.header.nav.programs}
               </a>
               <a href="#advantages" className="text-muted-foreground hover:text-foreground transition-colors">
-                Преимущества
+                {t.header.nav.advantages}
               </a>
               <a href="#contacts" className="text-muted-foreground hover:text-foreground transition-colors">
-                Контакты
+                {t.header.nav.contacts}
               </a>
-              <Button className="bg-primary hover:bg-primary/90 text-white font-medium w-full mt-2">Записаться</Button>
+              <Button className="bg-primary hover:bg-primary/90 text-white font-medium w-full mt-2">
+                {t.header.cta}
+              </Button>
             </div>
           </nav>
         )}

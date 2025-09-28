@@ -1,7 +1,13 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Sparkles, Zap, Brain } from "lucide-react"
 
+import { useTranslations } from "@/components/language-provider"
+
 export function HeroSection() {
+  const t = useTranslations()
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10">
       {/* Background Elements */}
@@ -28,7 +34,7 @@ export function HeroSection() {
             <div className="relative">
               <img
                 src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D0%BD%D0%B0%D1%88%20%D0%B1%D0%BE%D1%82.jpg-pEshDjyZgmSpXSjSnxjac8lEBrKI2P.jpeg"
-                alt="Startum Kids AI Robot"
+                alt={t.hero.imageAlt}
                 className="w-48 h-48 object-contain animate-float"
               />
               <div className="absolute -top-2 -right-2 w-8 h-8 bg-accent rounded-full flex items-center justify-center animate-pulse-glow">
@@ -39,25 +45,23 @@ export function HeroSection() {
 
           {/* Main Heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-balance mb-6">
-            <span className="text-foreground">Startum Kids —</span>
+            <span className="text-foreground">{t.hero.titlePrefix}</span>
             <br />
             <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-              твой старт в будущее
+              {t.hero.titleHighlight}
             </span>
             <br />
-            <span className="text-foreground">с искусственным интеллектом</span>
+            <span className="text-foreground">{t.hero.titleSuffix}</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto text-balance">
-            Развиваем детей 8+ лет через практику с ИИ-инструментами, креативность и современные цифровые навыки
-          </p>
+          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto text-balance">{t.hero.subtitle}</p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 text-lg">
               <Zap className="w-5 h-5 mr-2" />
-              Попробовать бесплатно
+              {t.hero.primaryAction}
             </Button>
             <Button
               size="lg"
@@ -65,24 +69,22 @@ export function HeroSection() {
               className="border-2 border-secondary text-secondary hover:bg-secondary hover:text-white font-semibold px-8 py-4 text-lg bg-transparent"
             >
               <Brain className="w-5 h-5 mr-2" />
-              Узнать больше
+              {t.hero.secondaryAction}
             </Button>
           </div>
 
           {/* Features Preview */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-            <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <div className="w-2 h-2 bg-primary rounded-full"></div>
-              <span>Мини-группы до 6 детей</span>
-            </div>
-            <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <div className="w-2 h-2 bg-secondary rounded-full"></div>
-              <span>100% практические занятия</span>
-            </div>
-            <div className="flex items-center justify-center gap-2 text-muted-foreground">
-              <div className="w-2 h-2 bg-accent rounded-full"></div>
-              <span>Реальные проекты с ИИ</span>
-            </div>
+            {t.hero.features.map((feature, index) => {
+              const colors = ["bg-primary", "bg-secondary", "bg-accent"]
+
+              return (
+                <div key={feature} className="flex items-center justify-center gap-2 text-muted-foreground">
+                  <div className={`w-2 h-2 rounded-full ${colors[index] ?? "bg-primary"}`}></div>
+                  <span>{feature}</span>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>
